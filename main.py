@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Depends, HTTPException
+from fastapi_mcp import FastApiMCP
 from sqlalchemy.orm import Session
 import models, schemas, crud
 from database import SessionLocal, engine
@@ -6,6 +7,11 @@ from database import SessionLocal, engine
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+mcp = FastApiMCP(app)
+
+mcp.mount()
+
 
 # Dependency
 def get_db():
